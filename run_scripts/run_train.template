@@ -1,0 +1,17 @@
+#!/bin/bash
+#SBATCH --account=s2027
+#SBATCH -t 12:00:00
+#SBATCH -p gpu
+#SBATCH -N1
+#SBATCH -n1
+#SBATCH -G1
+#SBATCH -c1
+#SBATCH -J replace_seed
+#SBATCH -o train_lstm_nwm_v2_replace_seed.out
+#SBATCH -e train_lstm_nwm_v2_replace_seed.error
+module purge
+source /att/nobackup/jframe/anaconda3/etc/profile.d/conda.sh
+conda activate pytorch
+cd /att/nobackup/jframe/lstm_camels/
+seed=replace_seed
+python3 main_nwmlstm.py train --seed=${seed} --gpu=0

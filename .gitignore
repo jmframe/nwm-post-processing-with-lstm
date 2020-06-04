@@ -1,0 +1,15 @@
+data_temp/*
+jupyter_notes/.ipynb_checkpoints/*
+figures_and_tables/.ipynb_checkpoints/*
+z_old/*
+z_trash/*
+igs/*
+igs_plots/*
+run_output/*
+slurm_out/*
+papercode/*
+codebase/*
+jupyter_notes/*
+igs_v1_with_18_bad_basins/*
+__pycache__/*
+
