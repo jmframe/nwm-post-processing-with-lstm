@@ -1,0 +1,11 @@
+#!/bin/bash -f
+sbatch run_scripts/run_train_lstmnwm_83357.slurm
+sbatch run_scripts/run_train_lstmnwm_604500.slurm
+sbatch run_scripts/run_train_lstmnwm_484165.slurm
+sbatch run_scripts/run_train_lstmnwm_398144.slurm
+sbatch run_scripts/run_train_lstmnwm_602441.slurm
+sbatch run_scripts/run_train_lstmnwm_712381.slurm
+sbatch run_scripts/run_train_lstmnwm_785305.slurm
+sbatch run_scripts/run_train_lstmnwm_785306.slurm
+sbatch run_scripts/run_train_lstmnwm_785307.slurm
+sbatch run_scripts/run_train_lstmnwm_785308.slurm
