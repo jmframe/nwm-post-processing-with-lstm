@@ -40,7 +40,7 @@ GLOBAL_SETTINGS = {
     'clip_norm': True,
     'clip_value': 1,
     'dropout': 0.4,
-    'epochs': 30,
+    'epochs': 1,
     'hidden_size': 256,
     'initial_forget_gate_bias': 5,
     'log_interval': 50,
@@ -78,7 +78,8 @@ GLOBAL_SETTINGS = {
                        'streamflow', 'q_lateral', 'velocity', 'qSfcLatRunoff', 'qBucket', 'qBtmVertRunoff',
                        'ACCET','FIRA','FSA','FSNO','HFX','LH','SNEQV','SNOWH',
                        'SOIL_M1','SOIL_M2','SOIL_M3','SOIL_M4','SOIL_W1','SOIL_W2','SOIL_W3','SOIL_W4',
-                       'TRAD','UGDRNOFF'],
+                       'TRAD','UGDRNOFF',
+                       'mean_sfcheadsubrt','mean_zwattablrt','max_sfcheadsubrt','max_zwattablrt'],
     # list of column names to use as additional static inputs
     'static_inputs': []
 #    'static_inputs': ['p_mean_dyn', 'pet_mean_dyn', 'aridity_dyn', 't_mean_dyn',
@@ -651,7 +652,7 @@ def evaluate(user_cfg: Dict):
         embedding_hiddens=run_cfg["embedding_hiddens"]).to(DEVICE)
 
     # load trained model
-    weight_file = user_cfg["run_dir"] / 'model_epoch30.pt' 
+    weight_file = user_cfg["run_dir"] / 'model_epoch1.pt' 
     model.load_state_dict(torch.load(weight_file, map_location=DEVICE))
 
     date_range = pd.date_range(start=user_cfg["val_start"], end=user_cfg["val_end"])
