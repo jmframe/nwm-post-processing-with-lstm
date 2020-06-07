@@ -12,4 +12,4 @@ codebase/*
 jupyter_notes/*
 igs_v1_with_18_bad_basins/*
 __pycache__/*
-
+run_scripts/run_train_lstmnwm_*.slurm
