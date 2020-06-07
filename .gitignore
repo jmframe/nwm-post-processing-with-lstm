@@ -1,4 +1,6 @@
-data/*
+data/basin_dataset_public_v1p2/*
+data/dynamic_features_nwm_v2.p
+data/camels_attributes_v2.0/*
 jupyter_notes/.ipynb_checkpoints/*
 figures_and_tables/.ipynb_checkpoints/*
 z_old/*
@@ -12,4 +14,7 @@ codebase/*
 jupyter_notes/*
 igs_v1_with_18_bad_basins/*
 __pycache__/*
-run_scripts/run_train_lstmnwm_*.slurm
+run_scripts/*.slurm
+*.out
+*.error
+runs/*
