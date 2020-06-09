@@ -1,3 +1,5 @@
+*.h5
+*.p
 data/basin_dataset_public_v1p2/*
 data/dynamic_features_nwm_v2.p
 data/camels_attributes_v2.0/*

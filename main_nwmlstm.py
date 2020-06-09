@@ -40,7 +40,7 @@ GLOBAL_SETTINGS = {
     'clip_norm': True,
     'clip_value': 1,
     'dropout': 0.4,
-    'epochs': 1,
+    'epochs': 30,
     'hidden_size': 256,
     'initial_forget_gate_bias': 5,
     'log_interval': 50,
@@ -652,7 +652,7 @@ def evaluate(user_cfg: Dict):
         embedding_hiddens=run_cfg["embedding_hiddens"]).to(DEVICE)
 
     # load trained model
-    weight_file = user_cfg["run_dir"] / 'model_epoch1.pt' 
+    weight_file = user_cfg["run_dir"] / 'model_epoch30.pt' 
     model.load_state_dict(torch.load(weight_file, map_location=DEVICE))
 
     date_range = pd.date_range(start=user_cfg["val_start"], end=user_cfg["val_end"])

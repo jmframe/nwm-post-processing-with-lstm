@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -t 12:00:00
+#SBATCH -t 23:59:00
 #SBATCH -p gpu
 #SBATCH -n1
 #SBATCH -G1
@@ -13,4 +13,4 @@ conda activate pytorch
 cd /att/nobackup/jframe/lstm_camels/
 seed=replace_seed
 echo 'Running lstm for seed '${seed}
-python3 main_nwmlstm.py train --seed=${seed} --gpu=0
+python3 main_nwmlstm.py train --scaler_file=hdf_files/scaler_nwm_v2.p --train_file=hdf_files/train_data_nwm_v2.h5 --seed=${seed} --gpu=0

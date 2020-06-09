@@ -5,8 +5,8 @@
 #SBATCH -G1
 #SBATCH -c1
 #SBATCH -J eval
-#SBATCH -o train_lstm_nwm_v2_replace_run.out
-#SBATCH -e train_lstm_nwm_v2_replace_run.error
+#SBATCH -o evaluate_replace_run.out
+#SBATCH -e evaluate_replace_run.error
 module purge
 source /att/nobackup/jmframe/anaconda3/etc/profile.d/conda.sh
 conda activate pytorch
