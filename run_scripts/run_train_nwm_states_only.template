@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH -t 23:59:00
+#SBATCH -p gpu
+#SBATCH -n1
+#SBATCH -G1
+#SBATCH -c1
+#SBATCH -J replace_seed
+#SBATCH -o train_nwm_states_only_v2_replace_seed.out
+#SBATCH -e train_nwm_states_only_v2_replace_seed.error
+module purge
+source /att/nobackup/jframe/anaconda3/etc/profile.d/conda.sh
+conda activate pytorch
+cd /att/nobackup/jframe/lstm_camels/
+seed=replace_seed
+sf="hdf_files/scaler_nwm_states_only_v2.p"
+tf="hdf_files/train_data_nwm_states_only_v2.h5"
+echo 'Running lstm with only NWM states as dynamic inputs for seed '${seed}
+python3 main_nwm_states_only.py train --seed=${seed} --scaler_file=${sf} --train_file=${tf} --gpu=0

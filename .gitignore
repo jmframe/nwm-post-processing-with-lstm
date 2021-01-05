@@ -21,3 +21,4 @@ run_scripts/*.slurm
 *.error
 runs/*
 igs/*
+run_scripts/used/*
