@@ -33,7 +33,8 @@ from papercode.features import training_period_climate_indices
 ###########
 # Globals #
 ###########
-
+basin_list_file_train = 'basin_list_calibrated480.txt'
+basin_list_file_evaluate = 'basin_list.txt'
 # fixed settings for all experiments
 GLOBAL_SETTINGS = {
     'batch_size': 512,
@@ -460,7 +461,7 @@ def train(cfg):
             splits = pickle.load(fp)
         basins = splits[cfg["split"]]["train"]
     else:
-        basins = get_basin_list()
+        basins = get_basin_list(basin_list_file_train)
         #basins = basins[:30]
 
     # create folder structure for this run
@@ -618,7 +619,7 @@ def evaluate(user_cfg: Dict):
             splits = pickle.load(fp)
         basins = splits[run_cfg["split"]]["test"]
     else:
-        basins = get_basin_list()
+        basins = get_basin_list(basin_list_file_evaluate)
 
     # get attribute means/stds
     db_path = str(user_cfg["run_dir"] / "attributes.db")
@@ -875,7 +876,7 @@ def create_splits(cfg: dict):
     np.random.seed(cfg["seed"])
 
     # read in basin file
-    basins = get_basin_list()
+    basins = get_basin_list(basin_list_file_train)
 
     # create folds
     kfold = KFold(n_splits=cfg["n_splits"], shuffle=True, random_state=cfg["seed"])

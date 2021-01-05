@@ -33,7 +33,8 @@ from papercode.features import training_period_climate_indices
 ###########
 # Globals #
 ###########
-
+basin_list_file_train = 'basin_list_calibrated480.txt'
+basin_list_file_evaluate = 'basin_list.txt'
 # fixed settings for all experiments
 GLOBAL_SETTINGS = {
     'batch_size': 512,
@@ -52,34 +53,15 @@ GLOBAL_SETTINGS = {
     'train_end': pd.to_datetime('30092014', format='%d%m%Y'),
     'val_start': pd.to_datetime('01101994', format='%d%m%Y'),
     'val_end': pd.to_datetime('30092003', format='%d%m%Y'),
-    #'val_start': pd.to_datetime('01101989', format='%d%m%Y'),
-    #'val_end': pd.to_datetime('30091999', format='%d%m%Y'),
     # list of CAMELS attributes to add to the static inputs
-#    'camels_attr': ['elev_mean', 'slope_mean', 'area_gages2', 'carbonate_rocks_frac',
-#                    'geol_permeability', 'soil_depth_pelletier', 'soil_depth_statsgo',
-#                    'soil_porosity', 'soil_conductivity', 'max_water_content', 'sand_frac',
-#                    'silt_frac', 'clay_frac'],
     'camels_attr': ['elev_mean', 'slope_mean', 'area_gages2', 'frac_forest',
                     'lai_max', 'lai_diff', 'gvf_max', 'gvf_diff',
                     'soil_depth_pelletier', 'soil_depth_statsgo', 'soil_porosity', 'soil_conductivity',
                     'max_water_content', 'sand_frac', 'silt_frac', 'clay_frac',
                     'carbonate_rocks_frac', 'geol_permeability'],
-#    'camels_attr': ['elev_mean', 'slope_mean', 'area_gages2', 'frac_forest',
-#                    'lai_max', 'lai_diff', 'gvf_max', 'gvf_diff',
-#                    'soil_depth_pelletier', 'soil_depth_statsgo', 'soil_porosity', 'soil_conductivity',
-#                    'max_water_content', 'sand_frac', 'silt_frac', 'clay_frac',
-#                    'carbonate_rocks_frac', 'geol_permeability',
-#                    'p_mean', 'pet_mean', 'aridity', 
-#                    'frac_snow', 'high_prec_freq', 'high_prec_dur',
-#                    'low_prec_freq', 'low_prec_dur'],
-    # list of column names to use as time series input into the lstm
-#    'dynamic_inputs': ['PRCP(mm/day)','Tmax(C)', 'Tmin(C)','SRAD(W/m2)', 'Vp(Pa)'],
     'dynamic_inputs': ['PRCP(mm/day)','Tmax(C)', 'Tmin(C)','SRAD(W/m2)', 'Vp(Pa)'],
     # list of column names to use as additional static inputs
     'static_inputs': []
-#    'static_inputs': ['p_mean_dyn', 'pet_mean_dyn', 'aridity_dyn', 't_mean_dyn',
-#                      'frac_snow_dyn', 'high_prec_freq_dyn', 'high_prec_dur_dyn',
-#                      'low_prec_freq_dyn', 'low_prec_dur_dyn']
 }
 
 ###############
@@ -455,7 +437,7 @@ def train(cfg):
             splits = pickle.load(fp)
         basins = splits[cfg["split"]]["train"]
     else:
-        basins = get_basin_list()
+        basins = get_basin_list(basin_list_file_train)
         #basins = basins[:30]
 
     # create folder structure for this run
@@ -613,7 +595,7 @@ def evaluate(user_cfg: Dict):
             splits = pickle.load(fp)
         basins = splits[run_cfg["split"]]["test"]
     else:
-        basins = get_basin_list()
+        basins = get_basin_list(basin_list_file_evaluate)
 
     # get attribute means/stds
     db_path = str(user_cfg["run_dir"] / "attributes.db")
@@ -870,7 +852,7 @@ def create_splits(cfg: dict):
     np.random.seed(cfg["seed"])
 
     # read in basin file
-    basins = get_basin_list()
+    basins = get_basin_list(basin_list_file_train)
 
     # create folds
     kfold = KFold(n_splits=cfg["n_splits"], shuffle=True, random_state=cfg["seed"])
