@@ -4,7 +4,7 @@
 ## Content of main repository
 ### `main*.py` Main python file used for training and evaluating of our models, as well as to perform the robustness analysis using the `ealstm_regional_modeling` codebase.
 ### data/ contains the list of basins (USGS gauge ids) considered in our study
-### `jupyter_notes/` working notebooks calculating and plotting the results of our study. These notebooks will be updated and when in their final versions will be your starting point for duplicating results.
+### `figures/` working notebooks calculating and plotting the results of our study. These notebooks will be updated and when in their final versions will be your starting point for duplicating results.
 ### `environment_gpu.yml` can be used with Anaconda or Miniconda to create an environment with all packages needed.
 ### configs/ Configuration files for running the LSTM with the newer codebase `(lstm_based_hydrology)`
 ### `ig_nwm_lstm.py` This script is used to calculate the integrated gradients of the LSTM runs from the old codebase. The 'baselines' are all set to zero.
